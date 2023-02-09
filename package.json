@@ -1,0 +1,22 @@
+{
+  "name": "cpsc-5240-4240",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hilerioi/CPSC-5240-4240.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hilerioi/CPSC-5240-4240/issues"
+  },
+  "homepage": "https://github.com/hilerioi/CPSC-5240-4240#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
