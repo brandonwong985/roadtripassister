@@ -1,11 +1,11 @@
 import Mongoose = require("mongoose");
 import {DataAccess} from './../DataAccess';
-import {IListModel} from '../interfaces/IListModel';
+import {ITripModel} from '../interfaces/ITripModel';
 
 let mongooseConnection = DataAccess.mongooseConnection;
 let mongooseObj = DataAccess.mongooseInstance;
 
-class ListModel {
+class TripModel {
     public schema:any;
     public model:any;
 
@@ -18,34 +18,31 @@ class ListModel {
         this.schema = new Mongoose.Schema(
             {
                 name: String,
-                description: String,
-                listId: String,
-                due: String,
-                state: String,
-                owner: String
-            }, {collection: 'lists'}
+                tripId: Number,
+                owner: String,
+            }, {collection: 'trips'}
         );
     }
 
     public createModel(): void {
-        this.model = mongooseConnection.model<IListModel>("Lists", this.schema);
+        this.model = mongooseConnection.model<ITripModel>("Trips", this.schema);
     }
 
-    public retrieveAllLists(response:any): any {
+    public retrieveAllTrips(response:any): any {
         var query = this.model.find({});
         query.exec( (err, itemArray) => {
             response.json(itemArray) ;
         });
     }
 
-    public retrieveListCount(response:any): any {
-        console.log("retrieve List Count ...");
+    public retrieveTripCount(response:any): any {
+        console.log("retrieve Trip Count ...");
         var query = this.model.estimatedDocumentCount();
-        query.exec( (err, numberOfLists) => {
-            console.log("numberOfLists: " + numberOfLists);
-            response.json(numberOfLists) ;
+        query.exec( (err, numberOfTrips) => {
+            console.log("numberOfTrips: " + numberOfTrips);
+            response.json(numberOfTrips) ;
         });
     }
 
 }
-export {ListModel};
+export {TripModel};

@@ -4,7 +4,7 @@ exports.DataAccess = void 0;
 var Mongoose = require("mongoose");
 var DataAccess = /** @class */ (function () {
     function DataAccess() {
-        DataAccess.connect();
+        //DataAccess.connect();
     }
     DataAccess.connect = function () {
         if (this.mongooseInstance)
@@ -16,7 +16,7 @@ var DataAccess = /** @class */ (function () {
         this.mongooseInstance = Mongoose.connect(this.DB_CONNECTION_STRING);
         return this.mongooseInstance;
     };
-    DataAccess.DB_CONNECTION_STRING = 'mongodb://dbAdmin:test@localhost:3000/toDoSample?authSource=admin';
+    DataAccess.DB_CONNECTION_STRING = 'mongodb://dbAdmin:test@127.0.0.1:3000/?authSource=admin';
     return DataAccess;
 }());
 exports.DataAccess = DataAccess;

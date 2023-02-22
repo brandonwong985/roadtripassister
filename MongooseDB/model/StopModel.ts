@@ -1,12 +1,12 @@
 import Mongoose = require("mongoose");
 import {DataAccess} from './../DataAccess';
-import {ITaskModel} from '../interfaces/ITaskModel';
+import {IStopModel} from '../interfaces/IStopModel';
 import { STATUS_CODES } from "http";
 
 let mongooseConnection = DataAccess.mongooseConnection;
 let mongooseObj = DataAccess.mongooseInstance;
 
-class TaskModel {
+class StopModel {
     public schema:any;
     public innerSchema:any;
     public model:any;
@@ -19,48 +19,49 @@ class TaskModel {
     public createSchema(): void {
         this.schema = new Mongoose.Schema(
             {
-                listId: Number,
-                tasks: [
+                tripId: Number,
+                stops: [ 
                     {
-                        description: String,
-                        taskId: Number,
-                        shared: String,
-                        status: String
-                    }        
+                    description: String,
+                    stopId: Number,
+                    stopType: String,
+                    review: Number,
+                    address: String,
+                    }
                 ]
-            }, {collection: 'tasks'}
+            }, {collection: 'stops'}
         );
     }
 
     public createModel(): void {
-        this.model = mongooseConnection.model<ITaskModel>("Task", this.schema);
+        this.model = mongooseConnection.model<IStopModel>("Stop", this.schema);
     }
     
-    public retrieveTasksDetails(response:any, filter:Object) {
+    public retrieveStopsDetails(response:any, filter:Object) {
         var query = this.model.findOne(filter);
         query.exec( (err, itemArray) => {
             response.json(itemArray);
         });
     }
 
-    public retrieveTasksCount(response:any, filter:Object) {
+    public retrieveStopsCount(response:any, filter:Object) {
         var query = this.model.findOne(filter);
-        query.exec( (err, innerTaskList) => {
+        query.exec( (err, innerStopList) => {
             if (err) {
                 console.log('error retrieving count');
             }
             else {
-                if (innerTaskList == null) {
+                if (innerStopList == null) {
                     response.status(404);
                     response.json('{count: -1}');
                 }
                 else {
-                    console.log('number of tasks: ' + innerTaskList.tasks.length);
-                    response.json('{count:' + innerTaskList.tasks.length + '}');
+                    console.log('number of stops: ' + innerStopList.stops.length);
+                    response.json('{count:' + innerStopList.stops.length + '}');
                 }
             }
         });
     }
 
 }
-export {TaskModel};
+export {StopModel};

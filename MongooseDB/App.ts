@@ -1,7 +1,7 @@
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
-import {ListModel} from './model/ListModel';
-import {TaskModel} from './model/TaskModel';
+import {TripModel} from './model/TripModel';
+import {StopModel} from './model/StopModel';
 import * as crypto from 'crypto';
 
 // Creates and configures an ExpressJS web server.
@@ -9,16 +9,16 @@ class App {
 
   // ref to Express instance
   public expressApp: express.Application;
-  public Lists:ListModel;
-  public Tasks:TaskModel;
+  public Trips:TripModel;
+  public Stops:StopModel;
 
   //Run configuration methods on the Express instance.
   constructor() {
     this.expressApp = express();
     this.middleware();
     this.routes();
-    this.Lists = new ListModel();
-    this.Tasks = new TaskModel();
+    this.Trips = new TripModel();
+    this.Stops = new StopModel();
   }
 
   // Configure Express middleware.
@@ -30,18 +30,18 @@ class App {
   // Configure API endpoints.
   private routes(): void {
     let router = express.Router();
-    router.get('/app/list/:listId/count', (req, res) => {
-        var id = req.params.listId;
-        console.log('Query single list with id: ' + id);
-        this.Tasks.retrieveTasksCount(res, {listId: id});
+    router.get('/app/trip/:tripId/count', (req, res) => {
+        var id = req.params.tripId;
+        console.log('Query single trip with id: ' + id);
+        this.Stops.retrieveStopsCount(res, {tripId: id});
     });
 
-    router.post('/app/list/', (req, res) => {
+    router.post('/app/trip/', (req, res) => {
       const id = crypto.randomBytes(16).toString("hex");
       console.log(req.body);
         var jsonObj = req.body;
-        jsonObj.listId = id;
-        this.Lists.model.create([jsonObj], (err) => {
+        jsonObj.tripId = id;
+        this.Trips.model.create([jsonObj], (err) => {
             if (err) {
                 console.log('object creation failed');
             }
@@ -49,32 +49,20 @@ class App {
         res.send('{"id":"' + id + '"}');
     });
 
-    router.post('/app/list2/', (req, res) => {
-      const id = crypto.randomBytes(16).toString("hex");
-      console.log(req.body);
-        var jsonObj = req.body;
-        jsonObj.listId = id;
-        let doc = new this.Lists.model(jsonObj);
-        doc.save((err) => {
-           console.log('object creation failed');
-        });
-        res.send('{"id":"' + id + '"}');
+    router.get('/app/trip/:tripId', (req, res) => {
+        var id = req.params.tripId;
+        console.log('Query single trip with id: ' + id);
+        this.Stops.retrieveStopsDetails(res, {tripId: id});
     });
 
-    router.get('/app/list/:listId', (req, res) => {
-        var id = req.params.listId;
-        console.log('Query single list with id: ' + id);
-        this.Tasks.retrieveTasksDetails(res, {listId: id});
+    router.get('/app/trip/', (req, res) => {
+        console.log('Query All trip');
+        this.Trips.retrieveAllTrips(res);
     });
 
-    router.get('/app/list/', (req, res) => {
-        console.log('Query All list');
-        this.Lists.retrieveAllLists(res);
-    });
-
-    router.get('/app/listcount', (req, res) => {
-      console.log('Query the number of list elements in db');
-      this.Lists.retrieveListCount(res);
+    router.get('/app/tripcount', (req, res) => {
+      console.log('Query the number of trip elements in db');
+      this.Trips.retrieveTripCount(res);
     });
 
     this.expressApp.use('/', router);
