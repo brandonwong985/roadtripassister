@@ -1,0 +1,12 @@
+<h4 class="panel-heading" style="background-color:#337ab7" >
+    <a style="color:white" [routerLink] = "['/trip/', index+1]">{{index+1}} - {{trip.name}}</a>
+    </h4>
+
+    <table class="table" style="font-size:10pt;">
+      <tbody>
+        <tr>
+          <td>Name: <span>{{trip.name}}</span></td>
+          <td>Owner: <span>{{trip.owner}}</span></td>
+        </tr>
+      </tbody>
+    </table>

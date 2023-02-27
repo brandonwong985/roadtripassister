@@ -34,7 +34,7 @@ class StopModel {
     }
 
     public createModel(): void {
-        this.model = mongooseConnection.model<IStopModel>("Stop", this.schema);
+        this.model = mongooseConnection.model<IStopModel>("stops", this.schema);
     }
     
     public retrieveStopsDetails(response:any, filter:Object) {

@@ -25,7 +25,7 @@ class TripModel {
     }
 
     public createModel(): void {
-        this.model = mongooseConnection.model<ITripModel>("Trips", this.schema);
+        this.model = mongooseConnection.model<ITripModel>("trips", this.schema);
     }
 
     public retrieveAllTrips(response:any): any {

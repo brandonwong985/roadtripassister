@@ -25,6 +25,13 @@ var App = /** @class */ (function () {
     App.prototype.routes = function () {
         var _this = this;
         var router = express.Router();
+        router.use(function (req, res, next) {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+            next();
+        });
+        this.expressApp.use('/', router);
+        this.expressApp.use('/json', express.static(__dirname + '/json'));
         router.get('/app/trip/:tripId/count', function (req, res) {
             var id = req.params.tripId;
             console.log('Query single trip with id: ' + id);

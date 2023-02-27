@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./stops.component.css']
 })
 export class StopsComponent {
-
+  
 }

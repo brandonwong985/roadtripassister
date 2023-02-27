@@ -1,2 +1,2 @@
-export class Stop {
+export default class Stop {
 }

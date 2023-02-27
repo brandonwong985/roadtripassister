@@ -25,7 +25,7 @@ var StopModel = /** @class */ (function () {
         }, { collection: 'stops' });
     };
     StopModel.prototype.createModel = function () {
-        this.model = mongooseConnection.model("Stop", this.schema);
+        this.model = mongooseConnection.model("stops", this.schema);
     };
     StopModel.prototype.retrieveStopsDetails = function (response, filter) {
         var query = this.model.findOne(filter);

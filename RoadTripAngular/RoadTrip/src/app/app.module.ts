@@ -6,19 +6,24 @@ import { AppComponent } from './app.component';
 import { TripComponent } from './trip/trip.component';
 import { StopsComponent } from './trip/stops/stops.component';
 import { TripsComponent } from './trips/trips.component';
+import { TripTableComponent } from './trips/trip-table/trip-table.component';
+import { TripserviceService } from './tripservice.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
     TripComponent,
     StopsComponent,
-    TripsComponent
+    TripsComponent,
+    TripTableComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [TripserviceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -18,7 +18,7 @@ var TripModel = /** @class */ (function () {
         }, { collection: 'trips' });
     };
     TripModel.prototype.createModel = function () {
-        this.model = mongooseConnection.model("Trips", this.schema);
+        this.model = mongooseConnection.model("trips", this.schema);
     };
     TripModel.prototype.retrieveAllTrips = function (response) {
         var query = this.model.find({});
