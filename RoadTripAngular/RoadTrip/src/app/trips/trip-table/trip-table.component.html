@@ -1,12 +1,11 @@
-<h4 class="panel-heading" style="background-color:#337ab7" >
-    <a style="color:white" [routerLink] = "['/trip/', index+1]">{{index+1}} - {{trip.name}}</a>
+<h4 class="panel-heading" style="background-color:#ec920b" >
+    <a style="color:black" [routerLink] = "['/trip/', index+1]">{{trip.name}}</a>
     </h4>
 
     <table class="table" style="font-size:10pt;">
       <tbody>
-        <tr>
-          <td>Name: <span>{{trip.name}}</span></td>
-          <td>Date: <span>{{trip.date}}</span></td>
-        </tr>
+        <tr>Start: <span>{{trip.start}}</span></tr>
+        <tr>End: <span>{{trip.end}}</span></tr>
+        <tr>Date: <span>{{trip.date}}</span></tr>
       </tbody>
     </table>

@@ -52,7 +52,21 @@ stopsCollection.insert(
       stopType: "Food",
       review: 5,
       address: "456 Main Street",
-	 }
+	 },
+	 {
+		description: "In-N-Out",
+		stopId: 3,
+		stopType: "Food",
+		review: 4,
+		address: "6280 Keizer Station Blvd",
+	},
+	{
+		description: "Chipotle",
+		stopId: 4,
+		stopType: "Food",
+		review: 4,
+		address: "415 Sacremento St",
+	}
 	]
 }
 )
@@ -72,8 +86,29 @@ stopsCollection.insert(
       stopId: 2,
       stopType: "Food",
       review: 2,
-      address: "673 Back Alley way",
-	 }
+      address: "673 Back Alley Way",
+	 },
+	 {
+		description: "Hell's Kitchen",
+		stopId: 3,
+		stopType: "Food",
+		review: 4,
+		address: "985 Vegas Pkwy",
+	},
+	{
+		description: "Shake Shack",
+		stopId: 4,
+		stopType: "Food",
+		review: 4,
+		address: "22 Swift Rd",
+	},
+	{
+		description: "Jamba Juice",
+		stopId: 5,
+		stopType: "Food",
+		review: 4,
+		address: "67 Raspberry Rd",
+	}
 	]	
 }
 )
@@ -96,7 +131,7 @@ stopsCollection.insert(
       address: "Churchhill ln",
 	 },
 	 {
-	  description: "BurgerKing",
+	  description: "Burger King",
       stopId: 3,
       stopType: "Food",
       review: 1,
