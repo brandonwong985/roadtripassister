@@ -76,6 +76,13 @@ class App {
       this.Trips.retrieveTripCount(res);
     });
 
+    router.get('/app/trip/:tripId/:stopId', (req, res) => {
+      var tripId = req.params.tripId;
+      var stopId = req.params.stopId;
+      this.Stops.retrieveStopDetail(res, {tripId: tripId, 'stops.stopId': stopId}, stopId);
+      console.log('Querying trip: ' + tripId + ' and stop: ' + stopId)
+    });
+
     this.expressApp.use('/', router);
 
     this.expressApp.use('/app/json/', express.static(__dirname+'/app/json'));

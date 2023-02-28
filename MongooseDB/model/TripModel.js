@@ -14,7 +14,10 @@ var TripModel = /** @class */ (function () {
         this.schema = new Mongoose.Schema({
             name: String,
             tripId: Number,
-            owner: String
+            owner: String,
+            start: String,
+            end: String,
+            date: String
         }, { collection: 'trips' });
     };
     TripModel.prototype.createModel = function () {

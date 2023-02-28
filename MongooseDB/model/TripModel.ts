@@ -20,6 +20,9 @@ class TripModel {
                 name: String,
                 tripId: Number,
                 owner: String,
+                start: String,
+                end: String,
+                date: String,
             }, {collection: 'trips'}
         );
     }

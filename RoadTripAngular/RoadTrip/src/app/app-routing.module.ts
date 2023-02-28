@@ -4,11 +4,13 @@ import { Trip } from './share/trip';
 import { StopsComponent } from './trip/stops/stops.component';
 import { TripComponent } from './trip/trip.component';
 import { TripsComponent } from './trips/trips.component';
+import { StopComponent } from './stop/stop.component';
 
 const routes: Routes = [
   {path: '', component: TripsComponent},
-  {path: 'trip', component: StopsComponent},
-  {path: 'trip/:id', component: TripComponent}
+  {path: 'trip', component: TripsComponent},
+  {path: 'trip/:id', component: TripComponent},
+  {path: 'trip/:id/:stopId', component: StopComponent}
 ];
 
 @NgModule({

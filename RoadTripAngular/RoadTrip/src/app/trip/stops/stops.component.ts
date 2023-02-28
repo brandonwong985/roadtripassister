@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Input, Component } from '@angular/core';
+import IStopModelAngular from 'src/app/share/IStopModelAngular';
 
 @Component({
   selector: 'app-stops',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./stops.component.css']
 })
 export class StopsComponent {
-  
+  @Input() stops!: IStopModelAngular;
+  @Input() tripId!: string;
+  constructor() {}
 }

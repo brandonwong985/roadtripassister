@@ -6,21 +6,30 @@ tripsCollection.insert(
 {
 	  name: "California road Trip",
 	  tripId: 1,
-	  owner: "akhil"
+	  owner: "akhil",
+	  start: "Seattle",
+	  end: "San Francisco",
+	  date: "7/18/2023"
 }
 )
 tripsCollection.insert(
 {
 	  name: "Seattle road Trip",
 	  tripId: 2,
-	  owner: "akhil"
+	  owner: "akhil",
+	  start: "San Francisco",
+	  end: "Seattle",
+	  date: "7/20/2023"
 }
 )
 tripsCollection.insert(
 {
 	  name: "Ohio road Trip",
 	  tripId: 3,
-	  owner: "akhil"
+	  owner: "akhil",
+	  start: "Washington",
+	  end: "Ohio",
+	  date: "4/20/2023"
 }
 )
 db.createCollection('stops')
