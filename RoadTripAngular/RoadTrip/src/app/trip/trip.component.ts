@@ -13,7 +13,6 @@ import { StopsComponent } from './stops/stops.component';
 })
 export class TripComponent {
   Stops!: Stop;
-  stopsObservable!: Observable<Stop>;
   stopTripId!: number;
   tripId: string;
 

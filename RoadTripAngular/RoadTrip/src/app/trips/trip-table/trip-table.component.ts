@@ -1,5 +1,6 @@
 import { Input, Component } from '@angular/core';
 
+
 @Component({
   selector: 'app-trip-table',
   templateUrl: './trip-table.component.html',

@@ -23,6 +23,6 @@ export class TripserviceService {
   }
 
   getStopDetail(id: string, stopId: string) {
-    return this.httpClient.get(this.hostUrl + "/app/trip/" + id + "/" + stopId);
+    return this.httpClient.get(this.hostUrl + "/app/trip/" + id + "/stop/" + stopId);
   }
 }

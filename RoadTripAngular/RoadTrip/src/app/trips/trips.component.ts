@@ -11,8 +11,6 @@ import { TripserviceService } from '../tripservice.service';
 export class TripsComponent {
   tripObservable: Observable<ITripModelAngular[]>;
 
-  @Input() tripNumber: number[] = [1,2];
-
   constructor(trips: TripserviceService){
     this.tripObservable = trips.getTripIndex();
   }

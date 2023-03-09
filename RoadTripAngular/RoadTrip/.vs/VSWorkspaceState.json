@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\share",
+    "\\src\\app\\stop",
+    "\\src\\app\\trip",
+    "\\src\\app\\trips",
+    "\\src\\app\\trips\\trip-table",
+    "\\src\\app\\trip\\stops"
+  ],
+  "SelectedNode": "\\src\\app\\stop\\stop.component.html",
+  "PreviewInSolutionExplorer": false
+}
