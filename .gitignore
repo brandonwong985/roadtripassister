@@ -15,3 +15,5 @@ expressServer/
 nodeServer/
 typescript/
 MongooseDB/db/
+.DS_Store
+MongooseDB.online/
