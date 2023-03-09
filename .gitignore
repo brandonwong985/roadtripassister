@@ -13,3 +13,5 @@ Mocha/
 classSample/
 expressServer/
 nodeServer/
+typescript/
+MongooseDB/db/
