@@ -15,7 +15,7 @@ export class TripserviceService {
   constructor(private httpClient: HttpClient) { }
 
   getTripIndex() {
-    return this.httpClient.get<ITripModelAngular[]>(this.hostUrl + "/app/trip");
+    return this.httpClient.get(this.hostUrl + "/app/trip");
   }
 
   getStopsDetails(id: string) {
@@ -23,6 +23,6 @@ export class TripserviceService {
   }
 
   getStopDetail(id: string, stopId: string) {
-    return this.httpClient.get(this.hostUrl + "/app/trip/" + id + "/" + stopId);
+    return this.httpClient.get(this.hostUrl + "/app/trip/" + id + "/stop/" + stopId);
   }
 }

@@ -62,7 +62,7 @@ var App = /** @class */ (function () {
             console.log('Query the number of trip elements in db');
             _this.Trips.retrieveTripCount(res);
         });
-        router.get('/app/trip/:tripId/:stopId', function (req, res) {
+        router.get('/app/trip/:tripId/stop/:stopId', function (req, res) {
             var tripId = req.params.tripId;
             var stopId = req.params.stopId;
             _this.Stops.retrieveStopDetail(res, { tripId: tripId, 'stops.stopId': stopId }, stopId);

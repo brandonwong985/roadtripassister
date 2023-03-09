@@ -9,11 +9,11 @@ import { TripserviceService } from '../tripservice.service';
   styleUrls: ['./trips.component.css']
 })
 export class TripsComponent {
-  tripObservable: Observable<ITripModelAngular[]>;
-
-  @Input() tripNumber: number[] = [1,2];
+  tripObservable!: Observable<ITripModelAngular[]>;
 
   constructor(trips: TripserviceService){
-    this.tripObservable = trips.getTripIndex();
+    trips.getTripIndex().subscribe((res: any) => {
+      this.tripObservable = of(res);
+    });
   }
 }

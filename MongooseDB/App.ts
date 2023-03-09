@@ -76,7 +76,7 @@ class App {
       this.Trips.retrieveTripCount(res);
     });
 
-    router.get('/app/trip/:tripId/:stopId', (req, res) => {
+    router.get('/app/trip/:tripId/stop/:stopId', (req, res) => {
       var tripId = req.params.tripId;
       var stopId = req.params.stopId;
       this.Stops.retrieveStopDetail(res, {tripId: tripId, 'stops.stopId': stopId}, stopId);

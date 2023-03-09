@@ -10,7 +10,7 @@ const routes: Routes = [
   {path: '', component: TripsComponent},
   {path: 'trip', component: TripsComponent},
   {path: 'trip/:id', component: TripComponent},
-  {path: 'trip/:id/:stopId', component: StopComponent}
+  {path: 'trip/:id/stop/:stopId', component: StopComponent}
 ];
 
 @NgModule({
