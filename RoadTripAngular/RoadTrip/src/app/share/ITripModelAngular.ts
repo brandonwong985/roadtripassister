@@ -1,6 +1,4 @@
-import Mongoose = require("mongoose");
-
-interface ITripModel extends Mongoose.Document {
+interface ITripModelAngular {
     name: string;
     tripId: number;
     owner: string;
@@ -8,4 +6,4 @@ interface ITripModel extends Mongoose.Document {
     end: string;
     date: string;
 }
-export {ITripModel};
+export default ITripModelAngular;

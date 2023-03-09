@@ -30,6 +30,17 @@ class App {
   // Configure API endpoints.
   private routes(): void {
     let router = express.Router();
+
+    router.use( (req, res, next) => {
+      res.header("Access-Control-Allow-Origin", "*");
+      res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+      next();
+    });
+
+    this.expressApp.use('/', router);
+    this.expressApp.use('/json', express.static(__dirname+'/json'));
+
+
     router.get('/app/trip/:tripId/count', (req, res) => {
         var id = req.params.tripId;
         console.log('Query single trip with id: ' + id);
@@ -63,6 +74,13 @@ class App {
     router.get('/app/tripcount', (req, res) => {
       console.log('Query the number of trip elements in db');
       this.Trips.retrieveTripCount(res);
+    });
+
+    router.get('/app/trip/:tripId/stop/:stopId', (req, res) => {
+      var tripId = req.params.tripId;
+      var stopId = req.params.stopId;
+      this.Stops.retrieveStopDetail(res, {tripId: tripId, 'stops.stopId': stopId}, stopId);
+      console.log('Querying trip: ' + tripId + ' and stop: ' + stopId)
     });
 
     this.expressApp.use('/', router);

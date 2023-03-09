@@ -25,6 +25,13 @@ var App = /** @class */ (function () {
     App.prototype.routes = function () {
         var _this = this;
         var router = express.Router();
+        router.use(function (req, res, next) {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+            next();
+        });
+        this.expressApp.use('/', router);
+        this.expressApp.use('/json', express.static(__dirname + '/json'));
         router.get('/app/trip/:tripId/count', function (req, res) {
             var id = req.params.tripId;
             console.log('Query single trip with id: ' + id);
@@ -54,6 +61,12 @@ var App = /** @class */ (function () {
         router.get('/app/tripcount', function (req, res) {
             console.log('Query the number of trip elements in db');
             _this.Trips.retrieveTripCount(res);
+        });
+        router.get('/app/trip/:tripId/stop/:stopId', function (req, res) {
+            var tripId = req.params.tripId;
+            var stopId = req.params.stopId;
+            _this.Stops.retrieveStopDetail(res, { tripId: tripId, 'stops.stopId': stopId }, stopId);
+            console.log('Querying trip: ' + tripId + ' and stop: ' + stopId);
         });
         this.expressApp.use('/', router);
         this.expressApp.use('/app/json/', express.static(__dirname + '/app/json'));

@@ -34,7 +34,7 @@ class StopModel {
     }
 
     public createModel(): void {
-        this.model = mongooseConnection.model<IStopModel>("Stop", this.schema);
+        this.model = mongooseConnection.model<IStopModel>("stops", this.schema);
     }
     
     public retrieveStopsDetails(response:any, filter:Object) {
@@ -63,5 +63,27 @@ class StopModel {
         });
     }
 
+    public retrieveStopDetail(response: any, filter: Object, stopId: any) {
+        var query = this.model.findOne(filter);
+        query.exec( (err, itemArray) => {
+            if (err) {
+                console.log('error retrieving stop');
+            }
+            else {
+                if (itemArray.stops.length >= stopId) {
+                    for (let i = 0; i < itemArray.stops.length; i++)
+                    {
+                        if (itemArray.stops[i].stopId == stopId)
+                        {
+                            response.json(itemArray.stops[i]);
+                        }
+                    }
+                }
+                else{
+                    response.json('{yikes: -1}');
+                }
+            }
+        });
+    }
 }
 export {StopModel};
