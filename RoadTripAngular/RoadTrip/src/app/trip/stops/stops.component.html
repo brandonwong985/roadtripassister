@@ -1,8 +1,0 @@
- <table class="table" style="font-size:10pt;">
-        <tbody *ngIf="stops != null">
-            <tr *ngFor="let result of stops.stops ; let i = index">
-                <td><a style="color:black" [routerLink] = "['/trip/', tripId, 'stop', i+1]">{{result.description}}</a></td>
-                <td>{{result.stopType}}</td>
-            </tr>
-        </tbody>
-    </table>

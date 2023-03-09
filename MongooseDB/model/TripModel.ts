@@ -20,15 +20,12 @@ class TripModel {
                 name: String,
                 tripId: Number,
                 owner: String,
-                start: String,
-                end: String,
-                date: String,
             }, {collection: 'trips'}
         );
     }
 
     public createModel(): void {
-        this.model = mongooseConnection.model<ITripModel>("trips", this.schema);
+        this.model = mongooseConnection.model<ITripModel>("Trips", this.schema);
     }
 
     public retrieveAllTrips(response:any): any {
