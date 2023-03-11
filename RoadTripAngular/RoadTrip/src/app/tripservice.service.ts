@@ -10,7 +10,7 @@ import Stop from './share/stop';
 })
 export class TripserviceService {
 
-  hostUrl:string = 'http://localhost:8080';
+  hostUrl:string = '';
 
   constructor(private httpClient: HttpClient) { }
 
