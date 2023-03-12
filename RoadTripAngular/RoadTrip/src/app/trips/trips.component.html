@@ -1,17 +1,22 @@
-<div class="container" background-color="#ffffff">
-	<div class="panel panel-default" style="border-width: 0px; border-style:solid">
-		<div class="panel-default">
-			<h3>Active Trips</h3>
-		</div>
-		<br>
-		<div>
-			<div class="panel panel-heading" style="border-width: 1px; border-style:solid; border-color:gray;" 
-			*ngFor="let result of (tripObservable | async); let i = index">
-				<!-- Default panel contents -->
+<style>
+    .panel-body{
+        width: 50%; 
+        margin: 0 auto;
+    }
+</style>
+<div class="container" style="background-color: transparent">
+    <div class="panel panel-default" style="border-width: 0px; border-style:solid; background-color: transparent">
+        <div class="panel-default" style="background-color: transparent">
+            <h2 style="color:white; text-align: center; font-weight: bold; text-shadow: 2px 2px 4px #000000;"> Active Trips </h2>
+        </div>
+        <div class="panel-body">
+            <div class="panel panel-heading" style="border-width: 1px; border-style:solid; border-color:gray;"
+                *ngFor="let result of (tripObservable | async); let i = index">
 
-				<app-trip-table [trip]="result" [index]="i"></app-trip-table>
-				<!-- Table -->
-			</div>
-		</div>
-	</div>
+                <app-trip-table class="table-small" [trip]="result" [index]="i"></app-trip-table>
+            </div>
+        </div>
+        
+    </div>
 </div>
+

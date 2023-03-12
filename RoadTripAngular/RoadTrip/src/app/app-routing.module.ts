@@ -5,9 +5,10 @@ import { StopsComponent } from './trip/stops/stops.component';
 import { TripComponent } from './trip/trip.component';
 import { TripsComponent } from './trips/trips.component';
 import { StopComponent } from './stop/stop.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 const routes: Routes = [
-  {path: '', component: TripsComponent},
+  {path: '', component: WelcomeComponent},
   {path: 'trip', component: TripsComponent},
   {path: 'trip/:id', component: TripComponent},
   {path: 'trip/:id/stop/:stopId', component: StopComponent}

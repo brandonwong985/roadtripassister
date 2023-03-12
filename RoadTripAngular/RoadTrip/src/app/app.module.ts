@@ -10,6 +10,7 @@ import { TripTableComponent } from './trips/trip-table/trip-table.component';
 import { TripserviceService } from './tripservice.service';
 import { HttpClientModule } from '@angular/common/http';
 import { StopComponent } from './stop/stop.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { StopComponent } from './stop/stop.component';
     StopsComponent,
     TripsComponent,
     TripTableComponent,
-    StopComponent
+    StopComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
