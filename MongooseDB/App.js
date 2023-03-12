@@ -26,6 +26,7 @@ var App = /** @class */ (function () {
         this.expressApp.use(bodyParser.urlencoded({ extended: false }));
         this.expressApp.use(session({ secret: 'honse' }));
         this.expressApp.use(passport.initialize());
+        this.expressApp.use(passport.session());
     };
     App.prototype.validateAuth = function (req, res, next) {
         if (req.isAuthenticated()) {
@@ -72,6 +73,7 @@ var App = /** @class */ (function () {
         });
         router.get('/app/trip/', this.validateAuth, function (req, res) {
             console.log('Query All trip');
+            console.log("userId hello: " + req.user.id);
             _this.Trips.retrieveAllTrips(res);
         });
         router.get('/app/tripcount', this.validateAuth, function (req, res) {

@@ -6,6 +6,7 @@ import * as crypto from 'crypto';
 import * as passport from 'passport';
 import GooglePassport from './GooglePassport';
 import * as session from 'express-session';
+import * as cookieParser from 'cookie-parser';
 
 // Creates and configures an ExpressJS web server.
 class App {
@@ -31,7 +32,9 @@ class App {
     this.expressApp.use(bodyParser.json());
     this.expressApp.use(bodyParser.urlencoded({ extended: false }));
     this.expressApp.use(session({secret: 'honse'}));
+    this.expressApp.use(cookieParser());
     this.expressApp.use(passport.initialize());
+    this.expressApp.use(passport.session());
   }
 
   private validateAuth(req, res, next): void {
@@ -93,6 +96,7 @@ class App {
 
     router.get('/app/trip/', this.validateAuth, (req, res) => {
         console.log('Query All trip');
+        //console.log("userId hello: " + req.user.id);
         this.Trips.retrieveAllTrips(res);
     });
 
