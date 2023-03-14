@@ -52,12 +52,12 @@ var App = /** @class */ (function () {
         });
         this.expressApp.use('/', router);
         this.expressApp.use('/json', express.static(__dirname + '/json'));
-        router.get('/app/trip/:tripId/count', function (req, res) {
+        router.get('/app/trip/:tripId/count', this.validateAuth, function (req, res) {
             var id = req.params.tripId;
             console.log('Query single trip with id: ' + id);
             _this.Stops.retrieveStopsCount(res, { tripId: id });
         });
-        router.post('/app/trip/', function (req, res) {
+        router.post('/app/trip/', this.validateAuth, function (req, res) {
             console.log(req.body);
             var jsonObj = req.body;
             _this.Trips.model.create([jsonObj], function (err) {
@@ -67,12 +67,12 @@ var App = /** @class */ (function () {
             });
             res.send('{"id":"' + req.body['tripId'] + '"}');
         });
-        router.get('/app/trip/:tripId', function (req, res) {
+        router.get('/app/trip/:tripId', this.validateAuth, function (req, res) {
             var id = req.params.tripId;
             console.log('Query single trip with id: ' + id);
             _this.Trips.retrieveTripDetails(res, { tripId: id });
         });
-        router.get('/app/trip/:tripId/stop', function (req, res) {
+        router.get('/app/trip/:tripId/stop', this.validateAuth, function (req, res) {
             var id = req.params.tripId;
             console.log('Query stops in single trip with trip id: ' + id);
             _this.Stops.retrieveStopsDetails(res, { tripId: id });
@@ -82,17 +82,52 @@ var App = /** @class */ (function () {
             console.log("userId hello: " + req.user.id);
             _this.Trips.retrieveAllTrips(res, { userId: req.user.id });
         });
-        router.get('/app/tripcount', function (req, res) {
+        router.get('/app/tripcount', this.validateAuth, function (req, res) {
             console.log('Query the number of trip elements in db');
             _this.Trips.retrieveTripCount(res);
         });
-        router.get('/app/trip/:tripId/stop/:stopId', function (req, res) {
+        router.get('/app/trip/:tripId/stop/:stopId', this.validateAuth, function (req, res) {
             var tripId = req.params.tripId;
             var stopId = req.params.stopId;
             _this.Stops.retrieveStopDetail(res, { tripId: tripId, 'stops.stopId': stopId }, stopId);
             console.log('Querying trip: ' + tripId + ' and stop: ' + stopId);
         });
-        router["delete"]('/app/trip/delete/:tripId', function (req, res) {
+        router["delete"]('/app/trip/delete/:tripId', this.validateAuth, function (req, res) {
+            var tripId = req.params.tripId;
+            _this.Trips.deleteTrip(res, { tripId: tripId });
+            console.log('Deleting trip with tripId: ' + tripId);
+        });
+        router.get('/app/user/name', this.validateAuth, function (req, res) {
+            res.json({ username: req.user.displayName });
+        });
+        //Test Routes 
+        router.post('/app/test/trip/', function (req, res) {
+            console.log(req.body);
+            var jsonObj = req.body;
+            _this.Trips.model.create([jsonObj], function (err) {
+                if (err) {
+                    console.log('object creation failed' + err);
+                }
+            });
+            res.send('{"id":"' + req.body['tripId'] + '"}');
+        });
+        router.get('/app/test/trip/', function (req, res) {
+            console.log('Query All trip');
+            console.log("userId hello: " + req.user.id);
+            _this.Trips.retrieveAllTrips(res, { userId: req.user.id });
+        });
+        router.get('/app/test/trip/:tripId', function (req, res) {
+            var id = req.params.tripId;
+            console.log('Query single trip with id: ' + id);
+            _this.Trips.retrieveTripDetails(res, { tripId: id });
+        });
+        router.get('/app/test/trip/:tripId/stop/:stopId', function (req, res) {
+            var tripId = req.params.tripId;
+            var stopId = req.params.stopId;
+            _this.Stops.retrieveStopDetail(res, { tripId: tripId, 'stops.stopId': stopId }, stopId);
+            console.log('Querying trip: ' + tripId + ' and stop: ' + stopId);
+        });
+        router["delete"]('/app/test/trip/delete/:tripId', function (req, res) {
             var tripId = req.params.tripId;
             _this.Trips.deleteTrip(res, { tripId: tripId });
             console.log('Deleting trip with tripId: ' + tripId);
