@@ -113,8 +113,7 @@ var App = /** @class */ (function () {
         });
         router.get('/app/test/trip/', function (req, res) {
             console.log('Query All trip');
-            console.log("userId hello: " + req.user.id);
-            _this.Trips.retrieveAllTrips(res, { userId: req.user.id });
+            _this.Trips.retrieveAllTrips(res, {});
         });
         router.get('/app/test/trip/:tripId', function (req, res) {
             var id = req.params.tripId;

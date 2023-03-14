@@ -143,8 +143,7 @@ class App {
 
     router.get('/app/test/trip/', (req:any, res) => {
       console.log('Query All trip');
-      console.log("userId hello: " + req.user.id);
-      this.Trips.retrieveAllTrips(res, {userId: req.user.id});
+      this.Trips.retrieveAllTrips(res, {});
     });
 
     router.get('/app/test/trip/:tripId', (req, res) => {
