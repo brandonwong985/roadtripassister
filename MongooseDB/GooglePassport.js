@@ -11,8 +11,8 @@ var GooglePassport = /** @class */ (function () {
         passport.use(new GoogleStrategy({
             clientID: this.clientId,
             clientSecret: this.secretId,
-            callbackURL: "/auth/google/callback"
-            //                profileFields: ['id', 'displayName', 'emails']
+            callbackURL: "/auth/google/callback",
+            profileFields: ['id', 'displayName', 'emails']
         }, function (accessToken, refreshToken, profile, done) {
             console.log("inside new password google strategy");
             process.nextTick(function () {

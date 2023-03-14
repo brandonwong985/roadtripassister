@@ -12,6 +12,7 @@ var TripModel = /** @class */ (function () {
     }
     TripModel.prototype.createSchema = function () {
         this.schema = new Mongoose.Schema({
+            userId: String,
             name: String,
             tripId: Number,
             owner: String,
@@ -23,8 +24,8 @@ var TripModel = /** @class */ (function () {
     TripModel.prototype.createModel = function () {
         this.model = mongooseConnection.model("trips", this.schema);
     };
-    TripModel.prototype.retrieveAllTrips = function (response) {
-        var query = this.model.find({});
+    TripModel.prototype.retrieveAllTrips = function (response, filter) {
+        var query = this.model.find(filter);
         query.exec(function (err, itemArray) {
             response.json(itemArray);
         });
@@ -35,6 +36,23 @@ var TripModel = /** @class */ (function () {
         query.exec(function (err, numberOfTrips) {
             console.log("numberOfTrips: " + numberOfTrips);
             response.json(numberOfTrips);
+        });
+    };
+    TripModel.prototype.retrieveTripDetails = function (response, filter) {
+        var query = this.model.findOne(filter);
+        query.exec(function (err, tripDetails) {
+            response.json(tripDetails);
+        });
+    };
+    TripModel.prototype.deleteTrip = function (response, filter) {
+        var query = this.model.deleteOne(filter);
+        query.exec(function (err) {
+            if (err) {
+                response.json({ success: false, message: 'Error deleting trip: ' + err });
+            }
+            else {
+                response.json({ success: true, message: 'Trip deleted.' });
+            }
         });
     };
     return TripModel;

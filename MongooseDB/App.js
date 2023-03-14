@@ -2,13 +2,14 @@
 exports.__esModule = true;
 exports.App = void 0;
 var express = require("express");
+var logger = require("morgan");
 var bodyParser = require("body-parser");
 var TripModel_1 = require("./model/TripModel");
 var StopModel_1 = require("./model/StopModel");
-var crypto = require("crypto");
 var passport = require("passport");
 var GooglePassport_1 = require("./GooglePassport");
 var session = require("express-session");
+var cookieParser = require("cookie-parser");
 // Creates and configures an ExpressJS web server.
 var App = /** @class */ (function () {
     //Run configuration methods on the Express instance.
@@ -22,9 +23,11 @@ var App = /** @class */ (function () {
     }
     // Configure Express middleware.
     App.prototype.middleware = function () {
+        this.expressApp.use(logger('dev'));
         this.expressApp.use(bodyParser.json());
         this.expressApp.use(bodyParser.urlencoded({ extended: false }));
         this.expressApp.use(session({ secret: 'honse' }));
+        this.expressApp.use(cookieParser());
         this.expressApp.use(passport.initialize());
         this.expressApp.use(passport.session());
     };
@@ -49,42 +52,50 @@ var App = /** @class */ (function () {
         });
         this.expressApp.use('/', router);
         this.expressApp.use('/json', express.static(__dirname + '/json'));
-        router.get('/app/trip/:tripId/count', this.validateAuth, function (req, res) {
+        router.get('/app/trip/:tripId/count', function (req, res) {
             var id = req.params.tripId;
             console.log('Query single trip with id: ' + id);
             _this.Stops.retrieveStopsCount(res, { tripId: id });
         });
-        router.post('/app/trip/', this.validateAuth, function (req, res) {
-            var id = crypto.randomBytes(16).toString("hex");
+        router.post('/app/trip/', function (req, res) {
             console.log(req.body);
             var jsonObj = req.body;
-            jsonObj.tripId = id;
             _this.Trips.model.create([jsonObj], function (err) {
                 if (err) {
-                    console.log('object creation failed');
+                    console.log('object creation failed' + err);
                 }
             });
-            res.send('{"id":"' + id + '"}');
+            res.send('{"id":"' + req.body['tripId'] + '"}');
         });
-        router.get('/app/trip/:tripId', this.validateAuth, function (req, res) {
+        router.get('/app/trip/:tripId', function (req, res) {
             var id = req.params.tripId;
             console.log('Query single trip with id: ' + id);
+            _this.Trips.retrieveTripDetails(res, { tripId: id });
+        });
+        router.get('/app/trip/:tripId/stop', function (req, res) {
+            var id = req.params.tripId;
+            console.log('Query stops in single trip with trip id: ' + id);
             _this.Stops.retrieveStopsDetails(res, { tripId: id });
         });
         router.get('/app/trip/', this.validateAuth, function (req, res) {
             console.log('Query All trip');
             console.log("userId hello: " + req.user.id);
-            _this.Trips.retrieveAllTrips(res);
+            _this.Trips.retrieveAllTrips(res, { userId: req.user.id });
         });
-        router.get('/app/tripcount', this.validateAuth, function (req, res) {
+        router.get('/app/tripcount', function (req, res) {
             console.log('Query the number of trip elements in db');
             _this.Trips.retrieveTripCount(res);
         });
-        router.get('/app/trip/:tripId/stop/:stopId', this.validateAuth, function (req, res) {
+        router.get('/app/trip/:tripId/stop/:stopId', function (req, res) {
             var tripId = req.params.tripId;
             var stopId = req.params.stopId;
             _this.Stops.retrieveStopDetail(res, { tripId: tripId, 'stops.stopId': stopId }, stopId);
             console.log('Querying trip: ' + tripId + ' and stop: ' + stopId);
+        });
+        router["delete"]('/app/trip/delete/:tripId', function (req, res) {
+            var tripId = req.params.tripId;
+            _this.Trips.deleteTrip(res, { tripId: tripId });
+            console.log('Deleting trip with tripId: ' + tripId);
         });
         this.expressApp.use('/', router);
         this.expressApp.use('/app/json/', express.static(__dirname + '/app/json'));

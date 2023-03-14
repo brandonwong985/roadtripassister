@@ -1,6 +1,7 @@
 import Mongoose = require("mongoose");
 
 interface ITripModel extends Mongoose.Document {
+    userId: string;
     name: string;
     tripId: number;
     owner: string;
